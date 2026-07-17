@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Onboarding - TruthPulse AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "inverse-primary": "#b3c5ff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#f8f7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#faf6ff",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-secondary-fixed": "#001f28",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#c2c6d8",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#005266",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed": "#001849",
+                    "surface-variant": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#5d60eb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-container": "#00ccf9",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb",
+                    "secondary-fixed-dim": "#4cd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "gutter-mobile": "12px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9ff;
+            overflow: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #0050cb 0%, #00ccf9 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #0050cb 0%, #00677f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #0050cb 0%, #00ccf9 100%);
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col h-screen max-w-md mx-auto relative">
+<!-- Top Action Bar -->
+<header class="flex justify-between items-center px-margin-mobile pt-12 pb-4 z-20">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg primary-gradient flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight text-on-background">TruthPulse</span>
+</div>
+<button onclick="window.location.href='login.html'" class="text-on-surface-variant font-label-md text-label-md uppercase tracking-widest hover:opacity-70 transition-opacity active:scale-95">
+            Skip
+        </button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile relative overflow-hidden">
+<!-- Decorative background glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/10 rounded-full blur-3xl pulse-glow"></div>
+<!-- 3D Illustration Canvas -->
+<div class="w-full aspect-square relative flex items-center justify-center mb-8">
+<div class="absolute inset-0 floating">
+<!-- 3D Magnifying Glass Illustration Placeholder -->
+<div class="w-full h-full rounded-3xl overflow-hidden glass-card flex items-center justify-center p-8 border-white/40">
+<img class="w-full h-full object-contain drop-shadow-2xl" data-alt="A high-quality 3D digital illustration of a futuristic, translucent glass magnifying glass with glowing blue edges. The lens is hovering over and magnifying a digital holographic news feed containing abstract cards and text. The background is a clean, bright, light-mode studio environment with soft shadows and a blue-to-cyan primary color palette. The style is premium corporate tech, with sleek metallic finishes and realistic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR-dzcNNR0YITRKEg7z9H95LUk25DGq7LO9pbEqfDm15Eho4Rca8H2f-pVo6f-sgqkLgnWn6dk3zUSPkFLIvEuVcvX-ivLyNYcYQ66v5joPR_kYgYDYUUuOLAkvhFlcmCI5EFEfYGVSUdgCHfUDrGlXC-nLZQn3nmJTgvmuKyOG1Dx6suXfh8jEPfGzOFaAtP1Yf7cWpl_hxdgvWYbCJIM9c315IULS8nDucBV5CzvEFBnY-jnNJQoqRrAYAqyq-_dOWK9Ioak9JQ"/>
+</div>
+</div>
+<!-- Floating Decorative Glassmorphic Elements -->
+<div class="absolute -top-4 -right-4 w-24 h-24 glass-card rounded-2xl rotate-12 flex items-center justify-center z-10 animate-bounce" style="animation-duration: 3s;">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div class="absolute -bottom-2 -left-2 w-20 h-20 glass-card rounded-full -rotate-12 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-secondary text-2xl">insights</span>
+</div>
+</div>
+<!-- Text Content -->
+<div class="text-center z-10 space-y-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">
+                Detect <span class="text-gradient font-extrabold">Fake News</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed px-2">
+                Our advanced AI analyzes millions of data points to verify information in seconds.
+            </p>
+</div>
+</main>
+<!-- Bottom Controls -->
+<footer class="px-margin-mobile pb-12 safe-bottom flex flex-col items-center gap-8">
+<!-- Progress Indicators -->
+<div class="flex gap-2">
+<div class="h-2 w-8 rounded-full primary-gradient"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+<div class="h-2 w-2 rounded-full bg-outline-variant"></div>
+</div>
+<!-- CTA Button -->
+<button onclick="window.location.href='login.html'" class="w-full primary-gradient text-white font-title-lg text-title-lg h-16 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all relative overflow-hidden group">
+<!-- Gloss Shine Effect -->
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+<span>Next</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.querySelector('button');
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

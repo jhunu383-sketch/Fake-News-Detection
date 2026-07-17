@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Bot Detection - TruthPulse AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#dce9ff",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "primary-fixed": "#dae1ff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb"
+            }
+          }
+        }
+      }
+    </script>
+<script>
+    if (localStorage.getItem('isAuthenticated') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<style>
+      body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+      .glass-card {
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(226, 232, 240, 0.8);
+      }
+      .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      @keyframes radar-scan {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+      .radar-line {
+          position: absolute;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(90deg, rgba(0, 102, 255, 0.4) 0%, rgba(0, 102, 255, 0) 100%);
+          animation: radar-scan 4s linear infinite;
+          transform-origin: 0% 50%;
+          left: 50%;
+          top: 0;
+      }
+</style>
+</head>
+<body class="text-on-background pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-3">
+<a href="dashboard.html" class="active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+</a>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Bot Detection</h1>
+</div>
+</header>
+
+<main class="mt-20 px-6 space-y-6">
+<!-- Target Input Section -->
+<section id="inputSection" class="glass-card rounded-3xl p-6 shadow-sm space-y-4">
+<h3 class="font-title-lg text-title-lg font-bold text-on-surface">Analyze Profile Behavior</h3>
+<p class="text-on-surface-variant font-body-md text-sm">Detect automated activity patterns, coordinated retweets, and bot networks.</p>
+
+<div class="space-y-3">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block ml-1" for="username">Profile Handle / Post URL</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-[20px]">alternate_email</span>
+</div>
+<input class="w-full pl-11 pr-4 py-3 bg-surface rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none font-body-md placeholder:text-outline" id="username" placeholder="e.g. tech_elon_bot" type="text"/>
+</div>
+</div>
+
+<button id="analyzeBtn" class="w-full bg-gradient-to-r from-primary to-secondary text-white font-title-lg text-body-lg h-12 rounded-xl flex items-center justify-center gap-2 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]">track_changes</span>
+<span>Analyze Bot Likelihood</span>
+</button>
+</section>
+
+<!-- Radar Scanner (Hidden by default) -->
+<section id="radarScanner" class="hidden glass-card rounded-3xl p-8 flex flex-col items-center justify-center text-center shadow-sm space-y-6">
+<div class="relative w-48 h-48 rounded-full border border-primary/20 flex items-center justify-center overflow-hidden bg-primary/5">
+<!-- Radar Grid Rings -->
+<div class="absolute w-36 h-36 rounded-full border border-primary/10"></div>
+<div class="absolute w-24 h-24 rounded-full border border-primary/10"></div>
+<div class="absolute w-12 h-12 rounded-full border border-primary/5"></div>
+<!-- Radar Rotating Sweeper -->
+<div class="radar-line"></div>
+<span class="material-symbols-outlined text-primary text-3xl animate-pulse">leak_add</span>
+</div>
+<p class="text-on-surface-variant font-body-md text-sm animate-pulse" id="scannerMessage">Scraping social feed data...</p>
+</section>
+
+<!-- Bot Analysis Report (Hidden by default) -->
+<section id="botReport" class="hidden glass-card rounded-3xl p-6 shadow-sm space-y-6">
+<div class="flex items-center justify-between border-b border-slate-100 pb-4">
+<div>
+<h3 class="font-title-lg text-title-lg font-bold text-on-surface" id="reportTitle">@tech_elon_bot</h3>
+<p class="text-on-surface-variant text-xs mt-1">Profile Analysis Completed</p>
+</div>
+<div class="px-3 py-1.5 bg-error-container/20 rounded-full border border-error/25 flex items-center gap-1">
+<span class="material-symbols-outlined text-error text-[16px]">robot</span>
+<span class="font-label-md text-error font-bold" id="badgeLabel">High Bot Score</span>
+</div>
+</div>
+
+<div class="space-y-4">
+<!-- Bot Gauge Meter -->
+<div class="flex justify-between items-center px-1">
+<span class="font-label-md text-on-surface-variant uppercase tracking-wider">Automation Probability</span>
+<span class="font-display-lg text-2xl font-extrabold text-error">78%</span>
+</div>
+<div class="h-2.5 w-full bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-error rounded-full" style="width: 78%"></div>
+</div>
+</div>
+
+<!-- Checklist -->
+<div class="space-y-3 pt-2">
+<h4 class="font-label-md text-on-surface-variant uppercase tracking-wider block ml-1">Anomalies Detected</h4>
+<!-- Item 1 -->
+<div class="flex items-center gap-3 p-3 bg-slate-50/50 rounded-xl border border-slate-100">
+<span class="material-symbols-outlined text-error">report</span>
+<div class="flex-1">
+<p class="font-body-md font-semibold text-on-surface text-sm">Abnormal Posting Frequency</p>
+<p class="text-on-surface-variant text-[11px]">Avg. 45 posts/hour. Beyond human limits.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-3 p-3 bg-slate-50/50 rounded-xl border border-slate-100">
+<span class="material-symbols-outlined text-error">pattern</span>
+<div class="flex-1">
+<p class="font-body-md font-semibold text-on-surface text-sm">Repetitive Sentence Patterns</p>
+<p class="text-on-surface-variant text-[11px]">92% similar phrases across multiple accounts.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-3 p-3 bg-slate-50/50 rounded-xl border border-slate-100">
+<span class="material-symbols-outlined text-error">group</span>
+<div class="flex-1">
+<p class="font-body-md font-semibold text-on-surface text-sm">Coordinated Re-sharing</p>
+<p class="text-on-surface-variant text-[11px]">Amplifies posts from specific nodes instantly.</p>
+</div>
+</div>
+</div>
+
+<div class="flex gap-4">
+<button id="resetBtn" class="flex-1 bg-slate-100 text-on-surface font-title-lg text-body-lg h-12 rounded-xl active:scale-95 transition-all">
+Check Another Profile
+</button>
+</div>
+</section>
+</main>
+
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface/90 backdrop-blur-md border-t border-white/10 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center px-2 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 active:scale-90 transition-all duration-300" href="verify.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md text-label-md">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="assistant.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="history.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+
+<script>
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const inputSection = document.getElementById('inputSection');
+    const radarScanner = document.getElementById('radarScanner');
+    const botReport = document.getElementById('botReport');
+    const usernameInput = document.getElementById('username');
+    const reportTitle = document.getElementById('reportTitle');
+    const resetBtn = document.getElementById('resetBtn');
+    const scannerMsg = document.getElementById('scannerMessage');
+
+    analyzeBtn.addEventListener('click', () => {
+        let nameVal = usernameInput.value.strip ? usernameInput.value.strip() : usernameInput.value;
+        if (!nameVal) {
+            nameVal = "anonymous_bot";
+        }
+        if (!nameVal.startsWith('@')) {
+            nameVal = '@' + nameVal;
+        }
+
+        inputSection.classList.add('hidden');
+        radarScanner.classList.remove('hidden');
+        botReport.classList.add('hidden');
+
+        reportTitle.innerText = nameVal;
+
+        const messages = [
+            "Scraping social feed data...",
+            "Analyzing timestamp distributions...",
+            "Running linguistic pattern matching...",
+            "Identifying amplification network clusters..."
+        ];
+
+        let index = 0;
+        const interval = setInterval(() => {
+            if (index < messages.length) {
+                scannerMsg.innerText = messages[index];
+                index++;
+            } else {
+                clearInterval(interval);
+                radarScanner.classList.add('hidden');
+                botReport.classList.remove('hidden');
+            }
+        }, 800);
+    });
+
+    resetBtn.addEventListener('click', () => {
+        inputSection.classList.remove('hidden');
+        radarScanner.classList.add('hidden');
+        botReport.classList.add('hidden');
+        usernameInput.value = '';
+    });
+</script>
+</body></html>

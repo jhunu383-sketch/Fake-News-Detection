@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<script>
+    if (localStorage.getItem('isAuthenticated') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>TruthPulse AI - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "inverse-primary": "#b3c5ff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#f8f7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#faf6ff",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-secondary-fixed": "#001f28",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#c2c6d8",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#005266",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed": "#001849",
+                    "surface-variant": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#5d60eb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-container": "#00ccf9",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb",
+                    "secondary-fixed-dim": "#4cd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "gutter-mobile": "12px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .trust-glow {
+            filter: drop-shadow(0 0 15px rgba(0, 80, 203, 0.3));
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.2; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+        .animate-pulse-ring { animation: pulse-ring 3s ease-in-out infinite; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a diverse young tech executive with a confident expression. The background is a soft-focus modern office with blue and white accents, maintaining a high-end corporate fintech aesthetic. The lighting is bright and crisp, highlighting skin textures and professional attire in a premium light-mode setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqFXfz7XWbVy7oO47mhteB8vn8JdEFSsiUWzqdXjP-PX5uhDD1AXJDk3pQwHt3HIXPESKfSug7C3SumChnpymfMiGObjF9nYT7lIFHyQWBRLH2xqTpSpDnlc_YqhLsX_iHmDW2L5f3fcFKvP7n8PNBX-TREju90OMeBoA0HdS584looATXYHDTQHNPmsWJcFO9PzQyX9LSdNCAfA2zqbd-RfZiHdK5pmGO626afSoO0Ml_6GEBVpD8p-h-uTcxLhDGkDDA9NOBKC4"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">TruthPulse AI</h1>
+</div>
+<button class="active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+</button>
+</header>
+<main class="mt-20 px-margin-mobile space-y-lg animate-fade-in-up">
+<!-- Welcome Header Section -->
+<section class="rounded-3xl p-6 bg-gradient-to-r from-[#0054d6] to-[#00ccf9] text-white shadow-lg relative overflow-hidden">
+  <!-- Decorative background circles -->
+  <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+  <div class="relative flex items-center justify-between">
+    <div class="space-y-1">
+      <h2 class="text-[10px] uppercase tracking-widest text-white/80 font-bold">Security Dashboard</h2>
+      <h3 class="text-2xl font-extrabold tracking-tight">Welcome back, Investigator!</h3>
+      <p class="text-xs text-white/90">System is ready for verification analytics.</p>
+    </div>
+    <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-white/50 shadow-md flex-shrink-0">
+      <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqFXfz7XWbVy7oO47mhteB8vn8JdEFSsiUWzqdXjP-PX5uhDD1AXJDk3pQwHt3HIXPESKfSug7C3SumChnpymfMiGObjF9nYT7lIFHyQWBRLH2xqTpSpDnlc_YqhLsX_iHmDW2L5f3fcFKvP7n8PNBX-TREju90OMeBoA0HdS584looATXYHDTQHNPmsWJcFO9PzQyX9LSdNCAfA2zqbd-RfZiHdK5pmGO626afSoO0Ml_6GEBVpD8p-h-uTcxLhDGkDDA9NOBKC4"/>
+    </div>
+  </div>
+</section>
+
+<!-- Search Section -->
+<section class="mt-4">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input id="searchInput" class="w-full h-14 pl-12 pr-28 rounded-2xl bg-white border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all text-body-lg font-body-lg shadow-sm outline-none" placeholder="Search news or paste a URL" type="text"/>
+<button id="voiceSearchBtn" class="absolute inset-y-2 right-20 px-2 text-outline hover:text-primary active:scale-95 transition-all flex items-center justify-center">
+                    <span class="material-symbols-outlined">mic</span>
+                </button>
+<button onclick="window.location.href='verify.html'" class="absolute inset-y-2 right-2 px-4 bg-gradient-to-r from-primary to-secondary text-white rounded-xl font-label-md text-label-md flex items-center gap-2 active:scale-95 transition-all">
+                    Verify
+                </button>
+</div>
+</section>
+
+<!-- AI Status Bento Grid -->
+<section class="grid grid-cols-3 gap-3">
+  <div class="glass-card rounded-2xl p-3.5 flex flex-col justify-between shadow-sm border border-slate-100">
+    <span class="text-[9px] uppercase font-bold text-outline tracking-wider">AI System</span>
+    <div class="flex items-center gap-1.5 mt-2">
+      <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+      <span class="text-xs font-bold text-on-surface">ONLINE</span>
+    </div>
+  </div>
+  <div class="glass-card rounded-2xl p-3.5 flex flex-col justify-between shadow-sm border border-slate-100">
+    <span class="text-[9px] uppercase font-bold text-outline tracking-wider">Total Checks</span>
+    <span class="text-sm font-extrabold text-primary mt-1">14.8K</span>
+  </div>
+  <div class="glass-card rounded-2xl p-3.5 flex flex-col justify-between shadow-sm border border-slate-100">
+    <span class="text-[9px] uppercase font-bold text-outline tracking-wider">Today's Runs</span>
+    <span class="text-sm font-extrabold text-secondary mt-1">342</span>
+  </div>
+</section>
+<!-- Quick Actions Section -->
+<section class="space-y-sm">
+<div class="flex items-center justify-between">
+  <h2 class="font-title-lg text-title-lg text-on-background">Quick Actions</h2>
+</div>
+<div class="flex overflow-x-auto gap-md no-scrollbar py-2 -mx-2 px-2">
+<!-- Action 1 -->
+<div onclick="window.location.href='verify.html'" class="flex-shrink-0 w-32 h-36 glass-card rounded-2xl p-md flex flex-col justify-between hover:border-primary/40 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300 cursor-pointer group shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Verify News</span>
+</div>
+<!-- Action 2 -->
+<div onclick="window.location.href='verifier.html'" class="flex-shrink-0 w-32 h-36 glass-card rounded-2xl p-md flex flex-col justify-between hover:border-primary/40 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300 cursor-pointer group shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary to-secondary/70 flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">language</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Check Website</span>
+</div>
+<!-- Action 3 -->
+<div onclick="window.location.href='image_analysis.html'" class="flex-shrink-0 w-32 h-36 glass-card rounded-2xl p-md flex flex-col justify-between hover:border-primary/40 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300 cursor-pointer group shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">image_search</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Image Analysis</span>
+</div>
+<!-- Action 4 -->
+<div onclick="window.location.href='bot_detection.html'" class="flex-shrink-0 w-32 h-36 glass-card rounded-2xl p-md flex flex-col justify-between hover:border-primary/40 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300 cursor-pointer group shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Bot Detection</span>
+</div>
+</div>
+</section>
+<!-- Central AI Trust Score Widget -->
+<section class="glass-card rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col items-center relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-4">Overall Credibility Gauge</h3>
+<div class="relative w-52 h-52 flex items-center justify-center">
+<!-- SVG Progress Circle -->
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="46" stroke="currentColor" stroke-width="4"></circle>
+<circle class="trust-glow" cx="50" cy="50" fill="transparent" r="46" stroke="url(#gradient)" stroke-dasharray="289" stroke-dashoffset="43" stroke-linecap="round" stroke-width="8"></circle>
+<defs>
+<lineargradient id="gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:var(--tw-color-primary)"></stop>
+<stop offset="100%" style="stop-color:var(--tw-color-secondary)"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Center Content -->
+<div class="absolute flex flex-col items-center text-center">
+<span class="font-display-lg text-[48px] leading-none font-extrabold text-primary">85%</span>
+<span class="font-label-md text-label-md text-outline uppercase tracking-widest mt-2">Trust Score</span>
+<div class="mt-3 px-2.5 py-0.5 bg-primary/10 rounded-full border border-primary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-md text-primary font-bold text-[10px]">Reliable</span>
+</div>
+</div>
+<!-- Pulse Decorative -->
+<div class="absolute w-44 h-44 border-2 border-primary/10 rounded-full animate-pulse-ring pointer-events-none"></div>
+</div>
+<p class="mt-4 text-body-md font-body-md text-on-surface-variant text-center max-w-[280px]">
+                Global information integrity remains stable but watch for trending deepfakes in finance.
+            </p>
+</section>
+
+<!-- Recent Activity Section -->
+<section class="space-y-sm">
+  <div class="flex items-center justify-between">
+    <h2 class="font-title-lg text-title-lg text-on-background">Recent Activity</h2>
+  </div>
+  <div class="glass-card rounded-2xl p-4 space-y-3.5 shadow-sm border border-slate-100">
+    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-emerald-500">check_circle</span>
+        <div>
+          <p class="text-[9px] text-outline font-bold uppercase tracking-wider">CLAIM VERIFIED</p>
+          <p class="text-sm font-semibold text-on-surface line-clamp-1">Mars Ice Caps Discovery 2026</p>
+        </div>
+      </div>
+      <span class="text-xs text-emerald-500 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">91% Real</span>
+    </div>
+    <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-red-500">cancel</span>
+        <div>
+          <p class="text-[9px] text-outline font-bold uppercase tracking-wider">BOT DETECTED</p>
+          <p class="text-sm font-semibold text-on-surface line-clamp-1">@crypto_superbot</p>
+        </div>
+      </div>
+      <span class="text-xs text-red-500 font-bold bg-red-50 px-2 py-0.5 rounded-full">94% Bot</span>
+    </div>
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-amber-500">warning</span>
+        <div>
+          <p class="text-[9px] text-outline font-bold uppercase tracking-wider">IMAGE MANIPULATED</p>
+          <p class="text-sm font-semibold text-on-surface line-clamp-1">Deepfake Photo - Prime Minister</p>
+        </div>
+      </div>
+      <span class="text-xs text-amber-500 font-bold bg-amber-50 px-2 py-0.5 rounded-full">88% Fake</span>
+    </div>
+  </div>
+</section>
+
+<!-- AI Insight of the Day -->
+<section class="glass-card rounded-2xl p-5 border border-primary/10 shadow-sm relative overflow-hidden">
+  <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none"></div>
+  <div class="flex items-start gap-3.5">
+    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+    </div>
+    <div class="space-y-1">
+      <h4 class="text-xs font-bold text-primary uppercase tracking-wider">AI Insight of the Day</h4>
+      <p class="text-[10px] text-outline font-medium">Fact-Checking Tip</p>
+      <p class="text-xs text-on-surface-variant leading-relaxed pt-1">
+        Before sharing news with high emotional content, copy a distinct phrase from the article and search for it inside double quotes ("") to verify if any other verified agency has reported it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Bento Section -->
+<section class="space-y-sm">
+  <div class="flex items-center justify-between">
+    <h2 class="font-title-lg text-title-lg text-on-background">Forensic Statistics</h2>
+  </div>
+  <div class="grid grid-cols-2 gap-3">
+    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between">
+      <div class="w-8 h-8 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500 mb-2">
+        <span class="material-symbols-outlined text-[18px]">gavel</span>
+      </div>
+      <div>
+        <p class="text-[9px] font-bold text-outline uppercase tracking-wider">Fake News Flagged</p>
+        <p class="text-lg font-extrabold text-on-surface mt-1">3,492</p>
+      </div>
+    </div>
+    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between">
+      <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-2">
+        <span class="material-symbols-outlined text-[18px]">verified_user</span>
+      </div>
+      <div>
+        <p class="text-[9px] font-bold text-outline uppercase tracking-wider">Trusted Sources</p>
+        <p class="text-lg font-extrabold text-on-surface mt-1">890</p>
+      </div>
+    </div>
+    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between">
+      <div class="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 mb-2">
+        <span class="material-symbols-outlined text-[18px]">photo_library</span>
+      </div>
+      <div>
+        <p class="text-[9px] font-bold text-outline uppercase tracking-wider">Images Analyzed</p>
+        <p class="text-lg font-extrabold text-on-surface mt-1">1,245</p>
+      </div>
+    </div>
+    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between">
+      <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-500 mb-2">
+        <span class="material-symbols-outlined text-[18px]">smart_toy</span>
+      </div>
+      <div>
+        <p class="text-[9px] font-bold text-outline uppercase tracking-wider">Bots Blocked</p>
+        <p class="text-lg font-extrabold text-on-surface mt-1">5,620</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Trending Alerts -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h2 class="font-title-lg text-title-lg text-on-background">Trending Alerts</h2>
+<span class="font-label-md text-primary font-bold cursor-pointer">View All</span>
+</div>
+<div class="space-y-sm">
+<!-- Alert 1 -->
+<div class="flex items-center gap-4 p-4 rounded-2xl bg-error-container/30 border border-error/10">
+<div class="w-10 h-10 rounded-full bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-0.5">
+<span class="px-2 py-0.5 bg-error text-white rounded text-[10px] font-bold uppercase">Critical</span>
+<span class="text-label-md font-label-md text-on-error-container">2m ago</span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Fake AI Stock Surge Viral Thread</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<!-- Alert 2 -->
+<div class="flex items-center gap-4 p-4 rounded-2xl bg-orange-50 border border-orange-200">
+<div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-0.5">
+<span class="px-2 py-0.5 bg-orange-500 text-white rounded text-[10px] font-bold uppercase">Moderate</span>
+<span class="text-label-md font-label-md text-orange-800">15m ago</span>
+</div>
+<p class="text-body-md font-body-md font-semibold text-on-surface">Coordinated Bot Activity: BioTech Inc.</p>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Latest Verified News -->
+<section class="space-y-md">
+<div class="flex items-center justify-between">
+<h2 class="font-title-lg text-title-lg text-on-background">Latest Verifications</h2>
+<span class="material-symbols-outlined text-outline">tune</span>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<!-- News Card 1 -->
+<div class="glass-card rounded-3xl overflow-hidden flex flex-col group shadow-sm">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A cinematic, high-angle shot of a futuristic cityscape with glowing data streams flowing through the streets. The scene is rendered in a premium light-mode style with a palette of soft whites, slate blues, and vibrant cyan accents. The atmosphere is clean, technological, and sophisticated, reflecting a high-end generative AI product aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBku8fkvgWKZp8Lomxc_iS_MPLyHBwHrZJYsMc4K6ok6K_TmhWn2iW9FvPjE3cs5AhiHlPBdJCVFG1aMKlwWuE5j_RIe6BACJOcneMoX8eryprELc6UiNZUTlxQg67clNuT2b3pEKO8ZCT7Fxq6D57hLMNRurW9PQtKOEarNYF3esrMr4a-Lkdk6zmg2Ysg1p72QiRKjAE2YeCBVZQnbZVw_4_4pPKGwTNp1mD_QB053nuoiXfj61ArXcqDwr7tIpxcBH0hX2wkXak"/>
+<div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full flex items-center gap-1.5 shadow-lg">
+<div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="font-label-md text-label-md font-bold text-on-surface">98% Verified</span>
+</div>
+</div>
+<div class="p-lg space-y-2">
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>Bloomberg News</span>
+<span>•</span>
+<span>4h ago</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors line-clamp-2">Central Banks Approve Global AI Governance Framework for Trading</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">The new framework aims to standardize how generative AI models are utilized in high-frequency trading across major markets...</p>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="glass-card rounded-3xl overflow-hidden flex flex-col group shadow-sm">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="An abstract visualization of a secure digital network, featuring crystalline geometric structures linked by thin, glowing fiber-optic lines. The design uses translucent layers and glassmorphism effects in a palette of primary blue and pristine white. The lighting is ethereal and precise, suggesting a secure, high-tech fintech infrastructure in a bright, modern environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDBcw3X531xlDY5OLk26Kgee1P9f3wfj4geulVqSIgJI42QfQYPRvkP0TBEvhSYsQfbeLDcmu-Ut6RpBSGzcR77xi-hmSZqEa5EXF8d2DXdqeDrwhIwFBP7GSfYQH4jOIB7WbThE6tNoTMpcljamvJGn7fP7UXzrGy-vIyaBSDGS4fbDyNcgNc6BnjVtX_4JbP7-S6HbiSibIAPgePqjB3F5idjDTJCOt8gFEhUsIXJZiiZXHhB_2cMU-uZAk0QPIAsudnN6TJ8C0"/>
+<div class="absolute top-4 left-4 px-3 py-1 bg-white/90 backdrop-blur rounded-full flex items-center gap-1.5 shadow-lg">
+<div class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></div>
+<span class="font-label-md text-label-md font-bold text-on-surface">62% Disputed</span>
+</div>
+</div>
+<div class="p-lg space-y-2">
+<div class="flex items-center gap-2 text-outline font-label-md text-label-md">
+<span>TechCrunch</span>
+<span>•</span>
+<span>7h ago</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface group-hover:text-primary transition-colors line-clamp-2">Rumors of Major Security Breach at Leading Crypto Exchange</h3>
+<p class="text-body-md font-body-md text-on-surface-variant line-clamp-2">Multiple sources report inconsistent transaction logs, but official statements from the exchange claim routine maintenance...</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface/90 backdrop-blur-md border-t border-white/10 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center px-2 py-3 pb-safe">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-90 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Verify -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-300" href="verify.html">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md">Verify</span>
+</a>
+<!-- AI -->
+<div class="relative -mt-10">
+<div class="absolute inset-0 bg-primary blur-lg opacity-40 rounded-full animate-pulse"></div>
+<button onclick="window.location.href='assistant.html'" class="relative w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</button>
+</div>
+<!-- Reports -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-300" href="history.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 active:scale-90 transition-all duration-300" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for score animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const trustCircles = document.querySelectorAll('circle[stroke-dasharray]');
+            trustCircles.forEach(circle => {
+                const targetOffset = 43; // Corresponds to 85%
+                circle.style.strokeDashoffset = '289';
+                setTimeout(() => {
+                    circle.style.transition = 'stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1)';
+                    circle.style.strokeDashoffset = targetOffset;
+                }, 300);
+            });
+            
+            // Search focus effect
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('trust-glow');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.classList.remove('trust-glow');
+            });
+
+            // Voice Search Speech Recognition Integration
+            const voiceBtn = document.getElementById('voiceSearchBtn');
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                voiceBtn.addEventListener('click', () => {
+                    voiceBtn.querySelector('span').innerText = 'hearing';
+                    voiceBtn.classList.add('text-primary');
+                    recognition.start();
+                });
+
+                recognition.onresult = (event) => {
+                    const resultText = event.results[0][0].transcript;
+                    searchInput.value = resultText;
+                };
+
+                recognition.onend = () => {
+                    voiceBtn.querySelector('span').innerText = 'mic';
+                    voiceBtn.classList.remove('text-primary');
+                };
+            } else {
+                voiceBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body></html>

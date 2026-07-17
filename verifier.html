@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<script>
+    if (localStorage.getItem('isAuthenticated') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TruthPulse AI - Website Verifier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "inverse-primary": "#b3c5ff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#f8f7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#faf6ff",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-secondary-fixed": "#001f28",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#c2c6d8",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#005266",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed": "#001849",
+                    "surface-variant": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#5d60eb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-container": "#00ccf9",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb",
+                    "secondary-fixed-dim": "#4cd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "gutter-mobile": "12px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-effect {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .premium-gradient {
+        background: linear-gradient(135deg, #0050cb 0%, #00ccf9 100%);
+      }
+      .premium-shadow {
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .glow-track-empty {
+        background: #e2e8f0;
+      }
+      .glow-track-fill {
+        background: linear-gradient(90deg, #0050cb, #00ccf9);
+        box-shadow: 0 0 10px rgba(0, 102, 255, 0.3);
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9ff;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface overflow-x-hidden pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-margin-mobile h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center">
+<img class="w-full h-full rounded-full object-cover" data-alt="A professional profile portrait of a corporate executive in a modern tech office setting. The lighting is crisp and bright, reflecting a light-mode UI aesthetic with subtle blue backlighting. High-definition photography with a shallow depth of field, highlighting trust and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9DSxqIr1_MGaSdi0KE-A3KrvRR_hNfkc-nPL-4Ter0zCdtKjwa_zTHfy6BqRRb32CFy_DQjhHRPPDOEbMDUpmHHW1dmNKqcdgA-OKHUG1N--O58oz8GdCSObNCslGu3tFjKApWIgyKCGy3vchJNfoL8fLLS5Oh0b-qEvw_p2FIlm5f5A1zvKJtZWfVSuWhzimYXb6-g5ZyZ7zy9leXOyJoLMnsXkCL9ndfLyToMaml85yH6bjtUXCL5npxFBpQZHKthc0cjLP2MY"/>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">TruthPulse AI</span>
+</div>
+<button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200">notifications</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-20 px-margin-mobile max-w-lg mx-auto">
+<!-- Header & Input Section -->
+<section class="mt-8 mb-lg text-center">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Website Verifier</h1>
+<p class="font-body-md text-on-surface-variant mb-lg">Instantly audit domain security and trust metrics.</p>
+<div class="relative group">
+<input class="w-full h-14 pl-12 pr-4 rounded-xl border border-outline-variant bg-surface-container-low focus:bg-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none text-body-lg font-body-lg shadow-sm" placeholder="Enter Website URL (e.g., example.com)" type="text"/>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">language</span>
+<button class="w-full mt-md py-4 bg-gradient-to-r from-primary to-secondary text-white font-title-lg rounded-xl flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">verified</span>
+                    Verify Domain
+                </button>
+</div>
+</section>
+<!-- Bento Grid Results -->
+<div class="grid grid-cols-2 gap-md">
+<!-- Trust Rating Card (Hero Component) -->
+<div class="col-span-2 bg-white p-lg rounded-2xl premium-shadow border border-outline-variant/30 flex items-center justify-between overflow-hidden relative">
+<div class="relative z-10">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Trust Rating</p>
+<h2 class="text-display-lg font-display-lg text-primary">A+</h2>
+<div class="mt-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-body-md text-secondary font-semibold">Maximum Reliability</span>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">verified_user</span>
+</div>
+</div>
+<!-- Reputation Score -->
+<div class="bg-white p-md rounded-2xl premium-shadow border border-outline-variant/30">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">thumb_up</span>
+<span class="font-label-md text-secondary bg-secondary-container/20 px-2 py-0.5 rounded-full">High</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Reputation Score</p>
+<div class="mt-2 h-2 w-full glow-track-empty rounded-full overflow-hidden">
+<div class="glow-track-fill h-full w-[92%]"></div>
+</div>
+</div>
+<!-- Domain Age -->
+<div class="bg-white p-md rounded-2xl premium-shadow border border-outline-variant/30">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">history</span>
+</div>
+<p class="font-label-md text-on-surface-variant">Domain Age</p>
+<p class="font-title-lg text-title-lg text-on-surface mt-1">5 Years</p>
+</div>
+<!-- HTTPS Status -->
+<div class="bg-white p-md rounded-2xl premium-shadow border border-outline-variant/30">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-secondary bg-secondary-container/20 p-2 rounded-lg">lock</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="font-label-md text-on-surface-variant">HTTPS Status</p>
+<p class="font-title-lg text-title-lg text-on-surface mt-1">Verified</p>
+</div>
+<!-- Map/Location Card -->
+<div class="bg-white p-md rounded-2xl premium-shadow border border-outline-variant/30 flex flex-col">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg">location_on</span>
+<span class="font-label-md text-on-surface-variant">Server: USA</span>
+</div>
+<div class="flex-grow min-h-[80px] rounded-xl overflow-hidden grayscale contrast-125 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="A stylized minimalist digital map showing the United States with a glowing data pulse centered over a tech hub. The map uses a clean, light-mode palette of soft grays and blues, fitting a premium fintech UI. Data streams and network nodes are subtly visible, emphasizing global connectivity and security infrastructure." data-location="USA" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Hrc1BT6jfQsezd_JhOC_5YvQviGjifGDxRCEJITalsmJjRlgEhSmv7Oa5D4-XX07L-jQ6AFWYXUsS5x1H-mBc6cCuS9N7MFUsOdgQcm5UQi-NtlQ9UTOETUeNQrtJT2ZN-aL6Z0dkltu5nX-UuRcq0COs8ky5_fr_cJ_7nn20HInsHLelVdNo1ARstqf2iPWV0sQ0bPfLABcudbAgIPaPasIC79tpkgKG8GV1Joe115VWyIIhKz9lLnQsOn5VYBLmsMDsla8XSg"/>
+</div>
+</div>
+<!-- AI Insight (Full Width) -->
+<div class="col-span-2 glass-effect p-lg rounded-2xl premium-shadow border border-primary/20 flex gap-4 items-start">
+<div class="relative">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-20 animate-pulse"></div>
+<span class="material-symbols-outlined text-primary relative bg-white p-2 rounded-full">smart_toy</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold uppercase mb-1">AI Intelligence Insight</h3>
+<p class="font-body-md text-on-surface text-sm leading-relaxed">
+                        Domain behavior aligns with high-tier financial institutions. No malicious redirects or phish-tank records detected in the last 24 months. SSL certificate is issued by a Tier 1 authority.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer Help -->
+<div class="mt-lg text-center pb-lg">
+<p class="font-label-md text-outline">Powered by TruthPulse DeepAnalysis Engine v4.2</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface/90 backdrop-blur-md border-t border-white/10 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center w-full px-2 py-3 pb-safe">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<!-- Verify (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-4 py-1 active:scale-90 transition-all duration-300" href="verify.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md text-label-md">Verify</span>
+</a>
+<!-- AI -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="assistant.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI</span>
+</a>
+<!-- Reports -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="history.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all px-3 py-1 rounded-xl active:scale-90 duration-300" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for result cards appearing
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.grid > div');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body></html>

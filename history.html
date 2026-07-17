@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<script>
+    if (localStorage.getItem('isAuthenticated') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Reports - TruthPulse AI</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .glow-track-bg {
+            background: #e2e8f0;
+        }
+        .glow-track-fill {
+            background: linear-gradient(90deg, #0050cb, #00ccf9);
+            box-shadow: 0px 2px 8px rgba(0, 80, 203, 0.3);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9ff;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#004e60",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "secondary": "#00677f",
+                        "primary-container": "#0066ff",
+                        "surface-tint": "#0054d6",
+                        "inverse-surface": "#213145",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "inverse-primary": "#b3c5ff",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#f8f7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface": "#f8f9ff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#faf6ff",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed": "#e1e0ff",
+                        "on-secondary-fixed": "#001f28",
+                        "on-primary-fixed-variant": "#003fa4",
+                        "surface-container-highest": "#d3e4fe",
+                        "outline-variant": "#c2c6d8",
+                        "on-tertiary-fixed": "#07006c",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#005266",
+                        "surface-dim": "#cbdbf5",
+                        "on-surface-variant": "#424656",
+                        "tertiary": "#4345d1",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-fixed": "#001849",
+                        "surface-variant": "#d3e4fe",
+                        "primary-fixed": "#dae1ff",
+                        "secondary-fixed": "#b7eaff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#727687",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#0b1c30",
+                        "surface-container-low": "#eff4ff",
+                        "tertiary-container": "#5d60eb",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b3c5ff",
+                        "secondary-container": "#00ccf9",
+                        "background": "#f8f9ff",
+                        "primary": "#0050cb",
+                        "secondary-fixed-dim": "#4cd6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "48px",
+                        "lg": "24px",
+                        "gutter-mobile": "12px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-mobile": "20px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface selection:bg-primary/20">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border border-outline/10">
+<img class="w-full h-full object-cover" data-alt="A clean, professional headshot of a diverse tech professional in a brightly lit, modern office environment. The lighting is soft and airy, matching a light-mode corporate aesthetic. The background features subtle glass partitions and hints of green indoor plants, conveying a sense of trustworthiness and high-tech precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxNvSvYqL0jksLBvU2gNvycEoWAVb_Yi2o4j0apo50SOPyeILTSkMaUxy7Hym4mSclRiBWC1LKiGnxZRJNbd0E73zraNY2kg5PD6PCh6aOkOQVbBg1L5e3_Q6s-UMIjRBlNuCfObv5CnQp6lyg2UM18bdskbdwcgkc1ourPI6EQiB1pbgGSwp6J03cw4YQeHl5m5zCUjf2HrJEhGHg6k0PU9rYOnEKfPtt-yIDrGVds8bzsyfwgTHddrI3x9W5toV6pXqlxKrE_Qc"/>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">TruthPulse AI</h1>
+</div>
+<div class="flex items-center gap-md">
+<button class="active:scale-95 transition-transform duration-200 text-on-surface-variant hover:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile min-h-screen">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-lg">
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Reports</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Review your history of AI verifications</p>
+</div>
+<button class="flex items-center gap-xs px-md py-sm bg-gradient-to-r from-primary to-secondary text-on-primary rounded-xl font-label-md text-label-md shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                Export PDF
+            </button>
+</div>
+<!-- Search & Filter -->
+<div class="space-y-4 mb-lg">
+<div class="flex gap-md">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container-low border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none font-body-md transition-all" placeholder="Search reports..." type="text"/>
+</div>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-high rounded-xl border border-outline-variant text-on-surface-variant active:scale-95 transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<!-- Premium Filter Pills -->
+<div class="flex gap-sm overflow-x-auto no-scrollbar py-1">
+<button class="px-4 py-1.5 bg-primary text-white rounded-full text-xs font-semibold shadow-sm active:scale-95 transition-all">All</button>
+<button class="px-4 py-1.5 bg-slate-100 text-on-surface-variant hover:bg-slate-200 rounded-full text-xs font-semibold active:scale-95 transition-all">Reliable</button>
+<button class="px-4 py-1.5 bg-slate-100 text-on-surface-variant hover:bg-slate-200 rounded-full text-xs font-semibold active:scale-95 transition-all">Suspicious</button>
+<button class="px-4 py-1.5 bg-slate-100 text-on-surface-variant hover:bg-slate-200 rounded-full text-xs font-semibold active:scale-95 transition-all">Flagged</button>
+</div>
+</div>
+<!-- Bento Grid / List of Reports -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Report Card 1 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-primary-container/10 text-primary rounded-lg font-label-md text-label-md">Politics</span>
+<span class="font-label-md text-label-md text-outline">Oct 24, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Global AI Policy Framework</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-primary">92%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="glow-track-fill h-full rounded-full" style="width: 92%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    High Confidence
+                </div>
+</div>
+<!-- Report Card 2 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-secondary-container/10 text-secondary rounded-lg font-label-md text-label-md">Finance</span>
+<span class="font-label-md text-label-md text-outline">Oct 22, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Digital Asset Regulation v4</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-secondary">78%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="glow-track-fill h-full rounded-full" style="width: 78%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-outline font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">info</span>
+                    Requires Context
+                </div>
+</div>
+<!-- Report Card 3 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-tertiary-container/10 text-tertiary rounded-lg font-label-md text-label-md">Science</span>
+<span class="font-label-md text-label-md text-outline">Oct 21, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Fusion Energy Breakthrough Claims</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-primary">95%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="glow-track-fill h-full rounded-full" style="width: 95%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    High Confidence
+                </div>
+</div>
+<!-- Report Card 4 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-primary-container/10 text-primary rounded-lg font-label-md text-label-md">Technology</span>
+<span class="font-label-md text-label-md text-outline">Oct 19, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Quantum Supremacy Milestone</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-primary">88%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="glow-track-fill h-full rounded-full" style="width: 88%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    Verified Source
+                </div>
+</div>
+<!-- Report Card 5 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-secondary-container/10 text-secondary rounded-lg font-label-md text-label-md">Economics</span>
+<span class="font-label-md text-label-md text-outline">Oct 15, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Central Bank Digital Currency Beta</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-error">42%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 42%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-error font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                    Inconsistent Data
+                </div>
+</div>
+<!-- Report Card 6 -->
+<div class="glass-card p-md rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="flex justify-between items-start mb-sm">
+<span class="px-sm py-xs bg-tertiary-container/10 text-tertiary rounded-lg font-label-md text-label-md">Environment</span>
+<span class="font-label-md text-label-md text-outline">Oct 12, 2023</span>
+</div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-md group-hover:text-primary transition-colors">Ocean Plastic Recovery Report</h3>
+<div class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant">Truth Score</span>
+<span class="font-label-md text-label-md font-bold text-primary">91%</span>
+</div>
+<div class="h-1.5 w-full glow-track-bg rounded-full overflow-hidden">
+<div class="glow-track-fill h-full rounded-full" style="width: 91%"></div>
+</div>
+<div class="mt-md flex items-center gap-xs text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    High Confidence
+                </div>
+</div>
+</div>
+<!-- AI Thinking Background Decoration -->
+<div class="fixed -bottom-32 -left-32 w-96 h-96 bg-primary/5 blur-[128px] pointer-events-none rounded-full"></div>
+<div class="fixed -top-32 -right-32 w-96 h-96 bg-secondary/5 blur-[128px] pointer-events-none rounded-full"></div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface/90 backdrop-blur-md border-t border-white/10 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center px-2 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300 rounded-xl px-3 py-1" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300 rounded-xl px-3 py-1" href="verify.html">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300 rounded-xl px-3 py-1" href="assistant.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary-container/20 rounded-xl px-3 py-1 active:scale-90 transition-all duration-300" href="history.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all duration-300 rounded-xl px-3 py-1" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for hover effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple search feedback simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.style.transform = 'scale(1.01)';
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.style.transform = 'scale(1)';
+        });
+    </script>
+</body></html>

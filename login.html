@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TruthPulse AI - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "inverse-primary": "#b3c5ff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#f8f7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#faf6ff",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-secondary-fixed": "#001f28",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#c2c6d8",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#005266",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed": "#001849",
+                    "surface-variant": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#5d60eb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-container": "#00ccf9",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb",
+                    "secondary-fixed-dim": "#4cd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "gutter-mobile": "12px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .premium-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #0050cb 0%, #00ccf9 100%);
+        }
+        .btn-premium-inner-glow {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Decorative Atmospheric Background Elements -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/10 rounded-full blur-[120px]"></div>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-[440px] px-margin-mobile py-xl z-10">
+<!-- Branding & Header Section -->
+<header class="text-center mb-xl">
+<div class="inline-flex items-center justify-center mb-md group">
+<div class="w-12 h-12 rounded-xl primary-gradient flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-white text-[28px]" data-icon="hub" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background font-bold tracking-tight mb-xs">Welcome Back</h1>
+<p class="text-on-surface-variant font-body-md">Sign in to your TruthPulse AI dashboard</p>
+</header>
+<!-- Login Card -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl premium-shadow p-lg">
+<form action="#" class="space-y-md" method="POST">
+<!-- Email Field -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block ml-1 uppercase tracking-wider" for="email">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="mail">mail</span>
+</div>
+<input class="w-full pl-[48px] pr-md py-3.5 bg-surface rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none font-body-md placeholder:text-outline" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-sm">
+<div class="flex justify-between items-center px-1">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider" for="password">Password</label>
+<a class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors" href="#">Forgot Password?</a>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="lock">lock</span>
+</div>
+<input class="w-full pl-[48px] pr-[48px] py-3.5 bg-surface rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all outline-none font-body-md placeholder:text-outline" id="password" name="password" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-md flex items-center text-outline hover:text-on-surface transition-colors" id="togglePassword" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me Toggle -->
+<div class="flex items-center space-x-2 py-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="font-body-md text-on-surface-variant select-none">Remember me for 30 days</span>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-md pt-sm">
+<button class="w-full primary-gradient text-white font-title-lg text-body-lg h-[52px] rounded-xl flex items-center justify-center gap-2 btn-premium-inner-glow hover:opacity-90 active:scale-[0.98] transition-all duration-200 shadow-md" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<div class="relative flex items-center justify-center py-2">
+<div class="w-full border-t border-outline-variant/30"></div>
+<span class="absolute px-4 bg-surface-container-lowest text-label-md font-label-md text-outline uppercase tracking-widest">or continue with</span>
+</div>
+<button onclick="localStorage.setItem('isAuthenticated', 'true'); window.location.href='dashboard.html'" class="w-full bg-white border border-outline-variant/50 text-on-surface font-title-lg text-body-lg h-[52px] rounded-xl flex items-center justify-center gap-3 hover:bg-surface-variant/20 active:scale-[0.98] transition-all duration-200" type="button">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-5.38z" fill="#EA4335"></path>
+</svg>
+<span>Google Sign-In</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Footer Footer -->
+<footer class="mt-lg text-center">
+<p class="text-on-surface-variant font-body-md">
+                New here? 
+                <a class="text-primary font-semibold hover:underline decoration-2 underline-offset-4 ml-1" href="#">Create Account</a>
+</p>
+</footer>
+</main>
+<!-- Success Message Toast (Hidden by default) -->
+<div class="fixed bottom-2xl left-1/2 -translate-x-1/2 transform scale-90 opacity-0 translate-y-4 transition-all duration-300 pointer-events-none" id="toast">
+<div class="bg-on-background text-surface px-lg py-md rounded-full shadow-2xl flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+<span class="font-label-md text-label-md">Processing secure login...</span>
+</div>
+</div>
+<script>
+        // Micro-interactions
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const form = document.querySelector('form');
+        const toast = document.getElementById('toast');
+
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = type === 'password' ? 'visibility' : 'visibility_off';
+            togglePassword.querySelector('span').textContent = icon;
+            togglePassword.querySelector('span').dataset.icon = icon;
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show toast
+            toast.classList.remove('opacity-0', 'scale-90', 'translate-y-4', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+            
+            // Pulse button
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="progress_activity">progress_activity</span> Authenticating...';
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'scale-90', 'translate-y-4', 'pointer-events-none');
+                toast.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+                submitBtn.innerHTML = '<span>Sign In</span><span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>';
+                localStorage.setItem('isAuthenticated', 'true');
+                window.location.href = 'dashboard.html';
+            }, 3000);
+        });
+
+        // Add a subtle parallax effect to the decorative circles
+        document.addEventListener('mousemove', (e) => {
+            const circles = document.querySelectorAll('div[class*="blur-"]');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            circles.forEach((circle, index) => {
+                const speed = (index + 1) * 20;
+                circle.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
+            });
+        });
+    </script>
+</body></html>

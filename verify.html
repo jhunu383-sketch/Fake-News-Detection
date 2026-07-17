@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<script>
+    if (localStorage.getItem('isAuthenticated') !== 'true') {
+        window.location.href = 'login.html';
+    }
+</script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Verify News | TruthPulse AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#0b1c30",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#004e60",
+                    "on-tertiary-fixed-variant": "#2f2ebe",
+                    "secondary": "#00677f",
+                    "primary-container": "#0066ff",
+                    "surface-tint": "#0054d6",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c0c1ff",
+                    "inverse-primary": "#b3c5ff",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#f8f7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#faf6ff",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed": "#e1e0ff",
+                    "on-secondary-fixed": "#001f28",
+                    "on-primary-fixed-variant": "#003fa4",
+                    "surface-container-highest": "#d3e4fe",
+                    "outline-variant": "#c2c6d8",
+                    "on-tertiary-fixed": "#07006c",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#005266",
+                    "surface-dim": "#cbdbf5",
+                    "on-surface-variant": "#424656",
+                    "tertiary": "#4345d1",
+                    "surface-bright": "#f8f9ff",
+                    "on-primary-fixed": "#001849",
+                    "surface-variant": "#d3e4fe",
+                    "primary-fixed": "#dae1ff",
+                    "secondary-fixed": "#b7eaff",
+                    "on-secondary": "#ffffff",
+                    "outline": "#727687",
+                    "surface-container": "#e5eeff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1c30",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#5d60eb",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed-dim": "#b3c5ff",
+                    "secondary-container": "#00ccf9",
+                    "background": "#f8f9ff",
+                    "primary": "#0050cb",
+                    "secondary-fixed-dim": "#4cd6ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "lg": "24px",
+                    "gutter-mobile": "12px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-mobile": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f8f9ff;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .circular-progress {
+        background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+                    conic-gradient(#0066ff 85%, #d3e4fe 0);
+      }
+      .glow-primary {
+        box-shadow: 0 4px 15px -1px rgba(0, 102, 255, 0.4);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c2c6d8;
+        border-radius: 10px;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">TruthPulse AI</h1>
+</div>
+<div class="flex gap-4">
+<button class="active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional close-up headshot of a young tech-savvy analyst looking directly at the camera with a confident and friendly expression. The background is a soft-focus modern office space with subtle blue and cool white lighting, aligning with a corporate-modern design system. The lighting is crisp and clear, highlighting the high-definition quality of the image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH1VKOx-Azuau83wsaH4gXGA_5fiLZf4ZB_8RGwQV5CmXYxYuqshtJCpGdWQVHoxJyGo394GgRpHNZ4wbCo6UhdtqdpDSKe4YbLZJFgsI_fe034kD3c3J3l124bE6fFyMwYVEJvZiSeda2xom5GGYt151rjdnlKlT-gz9pTqenluqrfb84ktgdH3R4UYByUUwZ6CJkQK6BfKbGlPFVDAs7JewWDaHONN9VA3I96moBbN-S4BX-uwvb5OGUlpdTEIyUEnthjI3F0zE"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-margin-mobile space-y-lg max-w-2xl mx-auto">
+<!-- Input Section -->
+<section class="space-y-md">
+<div class="glass-card p-md rounded-xl shadow-sm border border-outline-variant/30">
+<label class="block font-label-md text-label-md text-primary mb-2">INPUT SOURCE</label>
+<div class="relative">
+<textarea id="textareaInput" class="w-full h-32 bg-surface-container-low border-none focus:ring-2 focus:ring-primary rounded-lg p-md pr-12 font-body-md text-on-surface placeholder:text-outline/60 resize-none outline-none" placeholder="Paste news text, URL, or Social Post"></textarea>
+<button id="voiceBtn" class="absolute bottom-4 right-4 p-2 bg-white rounded-full shadow-md text-outline hover:text-primary active:scale-95 transition-all flex items-center justify-center">
+    <span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+</div>
+<div class="mt-md flex justify-end">
+<button id="analyzeBtn" class="px-xl py-3 bg-gradient-to-r from-primary to-secondary text-on-primary font-title-lg rounded-xl flex items-center gap-2 glow-primary active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                        Analyze
+                    </button>
+</div>
+</div>
+</section>
+<!-- Main Results Visualization -->
+<section id="resultsSection" class="hidden space-y-lg">
+  <!-- Report Card Header -->
+  <div class="glass-card rounded-3xl p-6 border border-primary/10 shadow-sm relative overflow-hidden">
+    <div class="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+      <div>
+        <span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary/10 px-2.5 py-1 rounded-full">Forensic Report</span>
+        <h3 class="text-xl font-extrabold text-on-surface mt-2">AI Verification Verdict</h3>
+      </div>
+      <!-- Download Report Button -->
+      <button id="downloadReportBtn" class="px-3.5 py-1.5 border border-primary/20 text-primary hover:bg-primary/5 font-label-md text-xs rounded-xl flex items-center gap-1.5 active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+        Export Report
+      </button>
+    </div>
+
+    <!-- Trust Meter Grid -->
+    <div class="flex flex-col md:flex-row items-center gap-6">
+      <div class="relative w-40 h-40 flex items-center justify-center flex-shrink-0">
+        <div id="trustGauge" class="circular-progress w-full h-full rounded-full flex items-center justify-center p-3.5">
+          <div class="bg-white w-full h-full rounded-full flex flex-col items-center justify-center shadow-inner">
+            <span id="trustPercentText" class="text-3xl font-extrabold text-primary">85%</span>
+            <span class="text-[9px] text-secondary font-bold uppercase tracking-wider">Credibility</span>
+          </div>
+        </div>
+      </div>
+      <div class="space-y-2 text-center md:text-left">
+        <div class="flex items-center justify-center md:justify-start gap-1.5">
+          <span class="material-symbols-outlined text-emerald-500 text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+          <h4 class="text-lg font-bold text-on-surface">Highly Reliable Content</h4>
+        </div>
+        <p class="text-xs text-on-surface-variant leading-relaxed max-w-sm">
+          Our deep learning models have analyzed the syntax, context, and external cross-references of this claim. The information aligns with verified records.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bento Analytics Grid -->
+  <div class="grid grid-cols-2 gap-md">
+    <!-- Bias Analysis -->
+    <div class="glass-card p-md rounded-2xl flex flex-col justify-between shadow-sm border border-slate-100">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">balance</span>
+        <span class="font-label-md text-label-md text-on-surface-variant font-medium">Bias Analysis</span>
+      </div>
+      <div class="mt-4">
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-sm font-bold text-on-surface">Low Bias</span>
+          <span id="biasPercentText" class="text-xs text-secondary font-bold">12%</span>
+        </div>
+        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="biasBar" class="h-full bg-secondary rounded-full" style="width: 12%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emotionality -->
+    <div class="glass-card p-md rounded-2xl flex flex-col justify-between shadow-sm border border-slate-100">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">psychology</span>
+        <span class="font-label-md text-label-md text-on-surface-variant font-medium">Linguistic Emotion</span>
+      </div>
+      <div class="mt-4">
+        <div class="flex justify-between items-end mb-1">
+          <span class="text-sm font-bold text-on-surface">Neutral Tone</span>
+          <span id="emotionalityPercentText" class="text-xs text-primary font-bold">24%</span>
+        </div>
+        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="emotionalityBar" class="h-full bg-primary rounded-full" style="width: 24%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clickbait -->
+    <div class="glass-card p-md rounded-2xl flex items-center justify-between shadow-sm border border-slate-100">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500">
+          <span class="material-symbols-outlined text-[20px]">ads_click</span>
+        </div>
+        <div>
+          <p class="text-[9px] text-outline font-bold uppercase tracking-wider">Clickbait Intensity</p>
+          <p class="text-sm font-bold text-on-surface">Minimal</p>
+        </div>
+      </div>
+      <span id="clickbaitPercentText" class="text-lg font-bold text-outline">08%</span>
+    </div>
+
+    <!-- Source Credibility -->
+    <div class="glass-card p-md rounded-2xl flex items-center justify-between shadow-sm border border-slate-100">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+          <span class="material-symbols-outlined text-[20px]">verified_user</span>
+        </div>
+        <div>
+          <p class="text-[9px] text-outline font-bold uppercase tracking-wider">Source Credibility</p>
+          <p class="text-sm font-bold text-on-surface">Excellent</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-0.5 text-amber-500">
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verification Timeline -->
+  <div class="glass-card rounded-2xl p-5 border border-primary/5 shadow-sm space-y-4">
+    <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
+      <span class="material-symbols-outlined text-primary text-[18px]">timeline</span>
+      <h3 class="text-sm font-bold text-on-surface uppercase tracking-wider">Verification Pipeline</h3>
+    </div>
+    <div class="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
+      <div class="relative flex items-start gap-3">
+        <div class="absolute -left-[22px] w-3.5 h-3.5 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
+        <div>
+          <h4 class="text-xs font-bold text-on-surface">Claim Submitted</h4>
+          <p class="text-[10px] text-outline">Linguistic syntactic tokens prepared for analysis</p>
+        </div>
+      </div>
+      <div class="relative flex items-start gap-3">
+        <div class="absolute -left-[22px] w-3.5 h-3.5 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
+        <div>
+          <h4 class="text-xs font-bold text-on-surface">Citation Database Query</h4>
+          <p class="text-[10px] text-outline">Checked SSL records & independent news agency indices</p>
+        </div>
+      </div>
+      <div class="relative flex items-start gap-3">
+        <div class="absolute -left-[22px] w-3.5 h-3.5 rounded-full bg-primary border-4 border-white shadow-sm flex items-center justify-center"></div>
+        <div>
+          <h4 class="text-xs font-bold text-on-surface">Bias & Sentiment Mapping</h4>
+          <p class="text-[10px] text-outline">Detected emotional density and clickbait headlines</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Explanation Section -->
+  <div class="glass-card rounded-2xl overflow-hidden border border-primary/5 shadow-sm">
+    <div class="bg-primary/5 px-md py-sm flex items-center gap-2 border-b border-primary/5">
+      <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+      <h3 class="font-label-md text-label-md text-primary uppercase font-bold tracking-wider">AI Explanation</h3>
+    </div>
+    <div class="p-md space-y-md">
+      <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        The content demonstrates a highly factual narrative structure with verifiable references to primary data sources. Our linguistic model detected very few superlative adjectives or emotionally charged framing typical of misinformation.
+      </p>
+      <div class="p-sm bg-surface-container rounded-lg flex items-start gap-3">
+        <span class="material-symbols-outlined text-secondary text-[20px]">lightbulb</span>
+        <p class="font-body-md text-body-md text-on-secondary-container italic">
+          Summary: "This report accurately reflects official policy statements and is corroborated by three independent news agencies."
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Trusted Articles -->
+  <div class="space-y-2">
+    <h3 class="text-sm font-bold text-on-surface uppercase tracking-wider pl-1">Related Trusted Articles</h3>
+    <div class="grid grid-cols-1 gap-3">
+      <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-slate-100 hover:border-primary/20 transition-all cursor-pointer">
+        <div class="space-y-1">
+          <p class="text-[10px] text-primary font-bold">Reuters News • 2h ago</p>
+          <h4 class="text-sm font-bold text-on-surface">NASA Mars Mission Corroborates Soil Sample Hydration Indices</h4>
+        </div>
+        <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-full">99% Real</span>
+      </div>
+      <div class="glass-card p-4 rounded-xl flex items-center justify-between border border-slate-100 hover:border-primary/20 transition-all cursor-pointer">
+        <div class="space-y-1">
+          <p class="text-[10px] text-primary font-bold">Associated Press • 5h ago</p>
+          <h4 class="text-sm font-bold text-on-surface">Liquid Streams Confirmed on Martian Slopes by Multiple Agencies</h4>
+        </div>
+        <span class="text-xs font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-full">97% Real</span>
+      </div>
+    </div>
+  </div>
+</section>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-xl z-50 bg-surface/90 backdrop-blur-md border-t border-white/10 shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] flex justify-around items-center w-full px-2 py-3 pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:scale-90 transition-all duration-300" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-secondary-fixed bg-primary-container/20 dark:bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 transition-all duration-300" href="verify.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md text-label-md">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:scale-90 transition-all duration-300" href="assistant.html">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-md text-label-md">AI</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:scale-90 transition-all duration-300" href="history.html">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline active:scale-90 transition-all duration-300" href="profile.html">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</a>
+</nav>
+<script>
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const resultsSection = document.getElementById('resultsSection');
+        const textareaInput = document.getElementById('textareaInput');
+
+        const trustGauge = document.getElementById('trustGauge');
+        const trustPercentText = document.getElementById('trustPercentText');
+        const biasPercentText = document.getElementById('biasPercentText');
+        const biasBar = document.getElementById('biasBar');
+        const emotionalityPercentText = document.getElementById('emotionalityPercentText');
+        const emotionalityBar = document.getElementById('emotionalityBar');
+        const clickbaitPercentText = document.getElementById('clickbaitPercentText');
+
+        // Speech recognition
+        const voiceBtn = document.getElementById('voiceBtn');
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            voiceBtn.addEventListener('click', () => {
+                voiceBtn.querySelector('span').innerText = 'hearing';
+                voiceBtn.classList.add('text-primary');
+                recognition.start();
+            });
+
+            recognition.onresult = (event) => {
+                const resultText = event.results[0][0].transcript;
+                textareaInput.value = resultText;
+            };
+
+            recognition.onend = () => {
+                voiceBtn.querySelector('span').innerText = 'mic';
+                voiceBtn.classList.remove('text-primary');
+            };
+        } else {
+            voiceBtn.style.display = 'none';
+        }
+
+        // Analysis animation
+        analyzeBtn.addEventListener('click', function() {
+            const originalContent = analyzeBtn.innerHTML;
+            analyzeBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Analyzing...';
+            analyzeBtn.disabled = true;
+            resultsSection.classList.add('hidden');
+
+            setTimeout(() => {
+                analyzeBtn.innerHTML = originalContent;
+                analyzeBtn.disabled = false;
+                resultsSection.classList.remove('hidden');
+
+                // Animate counts and charts
+                animateValue(trustPercentText, 0, 91, 1000, '%');
+                animateGauge(trustGauge, 91, 1000);
+                animateValue(biasPercentText, 0, 15, 1000, '%');
+                animateBar(biasBar, 15, 1000);
+                animateValue(emotionalityPercentText, 0, 32, 1000, '%');
+                animateBar(emotionalityBar, 32, 1000);
+                animateValue(clickbaitPercentText, 0, 8, 1000, '%');
+            }, 1500);
+        });
+
+        // Download Report Simulation
+        const downloadBtn = document.getElementById('downloadReportBtn');
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => {
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[16px]">sync</span> Exporting...';
+                downloadBtn.disabled = true;
+
+                // Create a beautiful premium toast
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 px-4 py-3 bg-slate-900/90 text-white rounded-2xl shadow-xl flex items-center gap-2 text-xs font-semibold z-50 transition-all duration-300 transform translate-y-10 opacity-0';
+                toast.innerHTML = '<span class="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span> Forensic verification report downloaded successfully.';
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-10', 'opacity-0');
+                    toast.classList.add('translate-y-0', 'opacity-100');
+                }, 50);
+
+                // Simulate downloading file
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent('TRUTHPULSE AI FORENSIC REPORT\n\nVerdict: Highly Reliable (85%)\nBias Score: 12% (Low Bias)\nLinguistic Emotion: 24% (Neutral Tone)\nClickbait Intensity: 08% (Minimal)\nSource Credibility: Excellent (4.8/5 Stars)\n\nAll security assertions validated.');
+                link.download = 'TruthPulse_Forensic_Report.txt';
+                
+                setTimeout(() => {
+                    link.click();
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                }, 1200);
+
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-2');
+                    setTimeout(() => toast.remove(), 300);
+                }, 4000);
+            });
+        }
+
+        function animateValue(obj, start, end, duration, suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = currentVal + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function animateBar(bar, targetWidth, duration) {
+            bar.style.width = '0%';
+            setTimeout(() => {
+                bar.style.transition = `width ${duration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+                bar.style.width = targetWidth + '%';
+            }, 50);
+        }
+
+        function animateGauge(gauge, targetPercent, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * targetPercent);
+                gauge.style.background = `radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(#0066ff ${currentVal}%, #d3e4fe 0)`;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
+</body></html>
